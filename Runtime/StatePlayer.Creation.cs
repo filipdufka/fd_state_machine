@@ -16,9 +16,8 @@ namespace FD.StateMachine {
         }
         public void CreateMachineController() {
 #if UNITY_EDITOR
-            Debug.Log("CreateMachineController");
             var con = CreateAnimatorController(gameObject.name);
-            if (animator != null) {
+            if (animator != null || con != null) {
                 animator.runtimeAnimatorController = con;
                 controller = con;
             }
@@ -69,9 +68,12 @@ namespace FD.StateMachine {
                     objectName + "StateMachine",
                     "controller",
                     "Choose save path for state machine controller");
-
-            var conn = AnimatorController.CreateAnimatorControllerAtPath(path);
-            return conn;
+            if (!string.IsNullOrEmpty(path))
+            {
+                var conn = AnimatorController.CreateAnimatorControllerAtPath(path);
+                return conn;
+            }else { return null; }
+            
 #endif
         }
 

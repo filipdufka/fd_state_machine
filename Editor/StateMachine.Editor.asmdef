@@ -1,0 +1,6 @@
+{
+  "name": "FD.StateMachine.Editor",
+  "rootNamespace": "FD.StateMachine.Editor",
+  "references": ["FD.StateMachine"],
+  "includePlatforms": ["Editor"]
+}

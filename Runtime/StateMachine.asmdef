@@ -1,0 +1,8 @@
+{
+  "name": "FD.StateMachine",
+  "rootNamespace": "FD.StateMachine",
+  "references": [],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false
+}

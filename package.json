@@ -1,6 +1,6 @@
 {
   "name": "com.fd.state_machine",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "displayName": "FD State Machine",
   "description": "Extensible Unity State Machine using Animator",
   "unity": "2021.3",

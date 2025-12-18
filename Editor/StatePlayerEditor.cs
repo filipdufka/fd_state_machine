@@ -5,9 +5,9 @@ using UnityEditor;
 using UnityEditor.Animations;
 using UnityEngine;
 
-namespace FD.StateMachine {
+namespace FD.StateMachine.Editor {
     [CustomEditor(typeof(StatePlayer))]
-    public class StatePlayerEditor : Editor {
+    public class StatePlayerEditor : UnityEditor.Editor {
         public override void OnInspectorGUI() {
             var sp = (StatePlayer)target;
 
@@ -63,6 +63,9 @@ namespace FD.StateMachine {
                 Undo.RecordObject(sp, "Change of Controller");
                 sp.controller = newController;
                 EditorUtility.SetDirty(sp);
+                Undo.RecordObject(sp.animator, "Setting Controller to Animator");
+                sp.animator.runtimeAnimatorController = newController;
+                EditorUtility.SetDirty(sp.animator);
             }
 
             if (sp.controller == null) {
