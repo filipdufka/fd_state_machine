@@ -79,23 +79,31 @@ namespace FD.StateMachine.Editor {
         static void ListAllBehaviours(StatePlayer sp) {
             if (sp.animator != null && sp.controller != null) {
                 var sizes = new int[] { 120, 70 };
+				var behaviours = sp.GetComponents<LinkedMonoBehaviour>();
 
-                EditorGUILayout.BeginHorizontal();
-                EditorGUILayout.LabelField("Behaviours:", GUILayout.Width(sizes[0]));
-                EditorGUILayout.LabelField("States:");
-                EditorGUILayout.LabelField("", GUILayout.Width(sizes[1]));
+				if(behaviours.Length > 0){
+					EditorGUILayout.BeginHorizontal();
+					EditorGUILayout.LabelField("Behaviours:", GUILayout.Width(sizes[0]));
+					EditorGUILayout.LabelField("States:");
+					EditorGUILayout.LabelField("", GUILayout.Width(sizes[1]));
 
-                EditorGUILayout.EndHorizontal();
+					EditorGUILayout.EndHorizontal();
 
 
-                var states = StatePlayer.GetAllStates(sp.controller);
-                var stateNames = states.ConvertAll(x => x.name).ToList();
-                stateNames.Insert(0, "No State");
-                var stateNamesArr = stateNames.ToArray();
+					var states = StatePlayer.GetAllStates(sp.controller);
+					var stateNames = states.ConvertAll(x => x.name).ToList();
+					stateNames.Insert(0, "No State");
+					var stateNamesArr = stateNames.ToArray();
 
-                foreach (var c in sp.GetComponents<LinkedMonoBehaviour>()) {
-                    ShowBehaviour(sp, c, sizes, states, stateNamesArr);
-                }
+					foreach (var c in behaviours) {
+						ShowBehaviour(sp, c, sizes, states, stateNamesArr);
+					}
+				}else{
+					EditorGUILayout.HelpBox(
+						"To use State Player, Add Components to this object which are inheriting LinkedMonoBehaviour.",
+						MessageType.Warning
+					);
+				}
             }
         }
 
